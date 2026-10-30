@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Question Paper Library · Medical College Library</title>
-<meta name="description" content="Past university question papers for MBBS and M.D. students. Search by subject, open online or download as PDF.">
+<title>Question Paper Library · Aarupadai Veedu Medical College &amp; Hospital, Puducherry</title>
+<meta name="description" content="Question Paper Library of Aarupadai Veedu Medical College &amp; Hospital, Puducherry. Past university question papers for MBBS and M.D. students: search by subject, open online or download as PDF.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -94,13 +94,37 @@ footer{max-width:980px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font
   .act .btn{flex:1}
 }
 @media (prefers-reduced-motion: reduce){ details.course>summary::after{transition:none} }
+
+.brand{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:6px}
+.brand .logo-card{background:#fff;border-radius:12px;padding:8px 12px;display:flex;align-items:center;justify-content:center}
+.brand img.logo{display:block;height:64px;width:auto;max-width:200px}
+.brand .titles{min-width:0}
+.live-note{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin-bottom:16px}
+.live-note code{background:var(--ses-bg);color:var(--ses-fg);padding:1px 6px;border-radius:5px;overflow-wrap:anywhere}
+.progress{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin:10px 0 0}
+.progress>i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.path{font-size:.86rem;color:var(--muted);font-weight:400}
+@media (max-width:620px){.brand img.logo{height:52px}}
+
+.brand .college{font-size:clamp(1rem,2.6vw,1.3rem);font-weight:700;letter-spacing:.01em;color:#fff}
+.brand .univ{font-size:.9rem;color:#C5D3E2;margin:2px 0 10px}
+.brand h1{margin:0;font-size:clamp(1.5rem,4vw,2.1rem)}
+.sitefoot{max-width:980px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:18px}
+.sitefoot strong{color:var(--ink)}
 </style>
 </head>
 <body>
 
 <header class="top">
   <div class="top-in">
-    <h1>Question Paper Library</h1>
+    <div class="brand">
+      <div class="logo-card"><img class="logo" id="logo" alt="AVMC logo" src="https://drive.google.com/thumbnail?id=1Nrcixk06CmdhnC3f9OAaUqfvOP-s-4ME&amp;sz=w500" onerror="this.closest('.logo-card').style.display='none'"></div>
+      <div class="titles">
+        <div class="college">Aarupadai Veedu Medical College &amp; Hospital, Puducherry</div>
+        <div class="univ">A constituent college of Vinayaka Mission’s Research Foundation (Deemed to be University), Salem</div>
+        <h1>Question Paper Library</h1>
+      </div>
+    </div>
     <p>Past university question papers for MBBS and M.D. students. Pick your year, find your subject, then open the paper or download the PDF.</p>
     <div class="searchbox">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
@@ -124,11 +148,18 @@ footer{max-width:980px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font
     <div class="links">
       <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1JEYITMF3MaM9j20fjrJphSZs-M8mAzWw">MBBS older sessions</a>
       <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1W7mfX2eDrAxQ4j7Xnprh5dSR4EJ4-wup">M.D. older sessions</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1hbLYPvko1SYBB8kBePGc9Tt41pRlnIRV">M.D. and M.S. specialty-wise papers</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1WN8GUDGlJc2wAO7neUC58f-rrhiv5o9F">Recommended textbooks</a>
       <a class="btn primary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1uyTlKPnJMBU6uJpTT9k2bfUjVMWNf0kx">Open the full Drive folder</a>
     </div>
   </section>
 </main>
 
+<div class="sitefoot">
+  <strong>Library, Aarupadai Veedu Medical College &amp; Hospital</strong><br>
+  Pondicherry–Cuddalore Main Road, Kirumampakkam, Puducherry – 607 402<br>
+  A constituent college of Vinayaka Mission’s Research Foundation (Deemed to be University), Salem.
+</div>
 <footer>
   Papers marked “Old and New Batch” contain both versions in one PDF. Papers marked “Combined paper” hold a third-year and a final-year subject in one PDF, so they are listed under both subjects.
 </footer>
@@ -259,6 +290,50 @@ const FILES = [
 ["1cCFBQyoQCftJnsOMmM4_e8B4YZPssUXK","III MBBS Community Medicine Paper I + IV MBBS General Surgery Paper I - Sep 2022 (Combined).pdf"],
 ["1qHeRzibNPz5ionkRb3KIP1mpsTUjZJPz","III MBBS ENT + IV MBBS General Medicine Paper II - Sep 2022 (Combined).pdf"],
 ["1_jlDWmxdz3e-3xOhaLEM9abAWpXpJszO","III MBBS Ophthalmology + IV MBBS General Medicine Paper I - Sep 2022 (Combined).pdf"],
+["1XzBMjW3CjLZFVT1Ruiu_xCtVCQ6pncLd","IV MBBS - General Medicine Paper I - Apr 2026.pdf"],
+["1sHBErhhktom_szjRZTsRcLkXAxq_X-0u","IV MBBS - General Medicine Paper I - Apr 2026 - Old Batch.pdf"],
+["1bf4oj12pXS6xb6Yl8YlD0gwIwQ-AzqD3","IV MBBS - General Medicine Paper II - Apr 2026.pdf"],
+["107C2VSIqRmWigR0xQgHDJssfAb-a0UoG","IV MBBS - General Medicine Paper II - Apr 2026 - Old Batch.pdf"],
+["1E9fIUL4vgBpMHrIx_xPUtXdjhMoNwkQy","IV MBBS - General Surgery Paper I - Apr 2026.pdf"],
+["1i4at-LKb-JmElwATI2hIgjlN1lPom8vK","IV MBBS - General Surgery Paper I - Apr 2026 - Old Batch.pdf"],
+["1VAZexYpiT9sktVNsHCdWV7m0TWfFxEmm","IV MBBS - General Surgery Paper II - Apr 2026.pdf"],
+["12KjhbiTKrU7CLfDQAg70hzW4U5Hcxdan","IV MBBS - General Surgery Paper II - Apr 2026 - Old Batch.pdf"],
+["1K_C_5wad8q9ESx1xsTOseqBA44DNj8Ec","IV MBBS - Obstetrics and Gynaecology Paper I - Apr 2026.pdf"],
+["1N0h93XxiuO63x4Su7Z7iw_Jt24rk1Wpi","IV MBBS - Obstetrics and Gynaecology Paper I - Apr 2026 - Old Batch.pdf"],
+["1Qy5qJM91KU3VOa53T8DPAO2ivowyDuu3","IV MBBS - Obstetrics and Gynaecology Paper II - Apr 2026.pdf"],
+["1yqDM4oPyApd1BXpzYuP-LRa8j5tJeUMq","IV MBBS - Obstetrics and Gynaecology Paper II - Apr 2026 - Old Batch.pdf"],
+["1AiTFvmF6WBpv0JqJI4oyKiBKhDrQF_a3","IV MBBS - Paediatrics (incl. Neonatology) - Apr 2026.pdf"],
+["1X-4jLYsOm0OyuZX4zUvmt2_Xxr9hKQk3","IV MBBS - Paediatrics (incl. Neonatology) - Apr 2026 - Old Batch.pdf"],
+["1B1tBF5ESY4m8Hk4Ch3-16GsiH8gaqjDc","III MBBS - Otorhinolaryngology (ENT) - Apr 2026.pdf"],
+["1eCe1XbxRDK8XVFfNH6oMFeXuQxiOjJRq","III MBBS - Ophthalmology - Apr 2026.pdf"],
+["14ZcWZ3pWqsLWN8y8csBjHsJwuFox2NCB","III MBBS - Community Medicine Paper I - Jul 2026.pdf"],
+["1i4DXABwSwXu13-SB_VjXiPT3GvtHZrwX","III MBBS - Community Medicine Paper I - Jul 2026 - Old Batch.pdf"],
+["17PAn9oSHw_H7uqmlfpO2gy7xYBdwY3m7","III MBBS - Community Medicine Paper II - Jul 2026.pdf"],
+["1nzz7EF3qKv4mI2rkyRBiGtBy3nUAc8IG","III MBBS - Forensic Medicine and Toxicology - Jul 2026.pdf"],
+["1DX7WcNUfU6WLSedmea83z4-vxzfncKQU","I MBBS - Anatomy Paper I - Aug 2026.pdf"],
+["1M3vMqm2Is9U8s_TQUBwX47vm6r1EtBxm","I MBBS - Anatomy Paper II - Aug 2026.pdf"],
+["1kdjb6me2a6qRKYyCPrc_RD2XkeYMYxkT","I MBBS - Physiology Paper I - Aug 2026.pdf"],
+["1Z_XQefXd3FVS5RjgeEEY6XRMmwR7oOxO","I MBBS - Physiology Paper II - Aug 2026.pdf"],
+["1fn0N5b4lNi0MOJYmyGPO9sxO7Fz5ShOU","I MBBS - Biochemistry Paper I - Aug 2026.pdf"],
+["1xQiLmvZxTBKBDj9ni02Iq07hVU5tk9kJ","I MBBS - Biochemistry Paper II - Aug 2026.pdf"],
+["1pUpimXD-zooOk3TtaJcrVzAuCW-MTKG5","III MBBS - Community Medicine Paper I - Jan 2025.pdf"],
+["1ghVeIt9vyzoRHXEe9nqDZRsCKAdSm-a5","III MBBS - Community Medicine Paper II - Jan 2025.pdf"],
+["1gGAfH3becePfcR-5-b1KuD6JdohIml28","III MBBS - Forensic Medicine and Toxicology - Jan 2025.pdf"],
+["1aLKAU21Ry6y163QZU7I5wTAUz7NWDfnq","I MBBS - Biochemistry Paper I - Oct 2024.pdf"],
+["15dfzgcAWkCu_jj4Il-wMN3ut_cfYKe88","I MBBS - Biochemistry Paper II - Oct 2024.pdf"],
+["1JVIHJorEGnx6_pHnEfea2EEwcWeqe_pF","I MBBS - Biochemistry Paper II - Aug 2024.pdf"],
+["1p8piRWbENTNLd55x4lfyxqyuwRhRN6E9","I MBBS - Anatomy - Question Bank.pdf"],
+["1KKXywcGiPnqH3nCIZKax9pmm9P1mJhyk","I MBBS - Physiology - Question Bank.pdf"],
+["1N0vlJXGM58I9uPqvv_UTXgWUw5I1_dyx","I MBBS - Biochemistry - Question Bank.pdf"],
+["1AI75Ne-FTuDbKKVOwTEOG7BSkMfCnj7M","II MBBS - Microbiology - Question Bank.pdf"],
+["178LqiIjlMN93ymfosDCdLwBCHd_dzBlL","II MBBS - Pharmacology - Question Bank.pdf"],
+["1JTlj5OjLLmBKUPWu0Sxasq-6mWS_I9Ge","II MBBS - Pathology - Question Bank.pdf"],
+["1xj7G78a22mNGpNjze4jpNPparMYdvJyy","III MBBS - Otorhinolaryngology (ENT) - Question Bank.pdf"],
+["19oo6NpQJg63c7v7ED1G3bWFWQBTxQsb4","III MBBS - Ophthalmology - Question Bank.pdf"],
+["17tIQMHlUobnxtXZOrk9C9b6-Umr2yF0P","III MBBS - Community Medicine - Question Bank.pdf"],
+["18VurPAhW7yBb793CW67tvjeMYjrECfiw","IV MBBS - General Medicine - Question Bank.pdf"],
+["1prUSZ9mGksEmmXUH11rmBQGMTO7q-2tr","IV MBBS - General Surgery - Question Bank.pdf"],
+["18HBdSZTK_gRc-8ok9HjRmDzjmcHFDdXr","IV MBBS - Paediatrics - Question Bank.pdf"],
 ["1b1o8-2I7QntbxVfSXyFTv2GlFoZzkXLK","IV MBBS - All subjects, Regular Exam - Apr 2026 (ZIP of papers).zip"],
 ["1a-9b1kkC3cZ1HxGmQQEPphRD8vKTlom3","M.D. Degree Examination - Supplementary exam - 2026 (ZIP of papers).zip"]
 ];
@@ -281,6 +356,7 @@ function baseCourse(c){
   return b;
 }
 function sessionOf(n){
+  if(/Question Bank/.test(n)) return {label:"Question Bank (large file)",key:999999};
   const m=n.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Sept|Sep|Oct|Nov|Dec)\s+(20\d\d)\b/);
   if(m) return {label:(m[1]==="Sept"?"Sep":m[1])+" "+m[2], key:(+m[2])*100+MON[m[1]]};
   const y=n.match(/\b(20\d\d)\b/);
@@ -295,6 +371,7 @@ function tagsOf(n,isZip){
     if(/Old Batch/.test(n)) t.push(["Old batch","p-old"]);
   }
   if(/Arrear/.test(n)) t.push(["Arrear","p-old"]);
+  if(/Question Bank/.test(n)) t.push(["Large file, opens slowly on mobile data","p-zip"]);
   if(/Combined\)/.test(n) && / \+ /.test(n)) t.push(["Combined paper","p-mix"]);
   return t;
 }
@@ -349,12 +426,13 @@ function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;
 function buildTabs(){
   const counts={all:new Set(ITEMS.map(i=>i.id)).size};
   YEAR_ORDER.forEach(y=>counts[y]=new Set(ITEMS.filter(i=>i.year===y).map(i=>i.id)).size);
-  const mk=(key,label)=>`<button class="tab" role="tab" data-y="${esc(key)}" aria-selected="${state.year===key}">${esc(label)}<small>${counts[key]}</small></button>`;
-  $tabs.innerHTML=mk("all","All papers")+YEAR_ORDER.map(y=>mk(y,y)).join("");
+  const mk=(key,label)=>`<button class="tab" role="tab" data-y="${esc(key)}" aria-selected="${state.year===key}">${esc(label)}${counts[key]!==undefined?`<small>${counts[key]}</small>`:""}</button>`;
+  $tabs.innerHTML=mk("all","All papers")+YEAR_ORDER.map(y=>mk(y,y)).join("")+mk("live","Browse every file (live)");
   $tabs.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{state.year=b.dataset.y;buildTabs();render();}));
 }
 
 function render(){
+  if(state.year==="live"){renderLive();return;}
   const q=state.q.trim().toLowerCase();
   const words=q.split(/\s+/).filter(Boolean);
   const list=ITEMS.filter(i=>{
@@ -396,6 +474,83 @@ function render(){
       html+=`</details>`;
     });
     html+=`</section>`;
+  });
+  $out.innerHTML=html;
+}
+
+
+/* ---------- Live view: lists EVERY file in the shared Drive folder ---------- */
+/* One-time setup: paste a free Google Drive API key below (see the README steps). */
+const DRIVE_API_KEY = "";
+const ROOT_FOLDER = "1uyTlKPnJMBU6uJpTT9k2bfUjVMWNf0kx";
+const SKIP_FOLDERS = new Set(["1Nh1li9_A4xkMW88zFZj5nAOCTqnkscpM"]); /* Staff Only */
+const LIVE = {state:"idle", files:[], done:0, total:0, error:""};
+
+async function driveList(folderId){
+  const out=[]; let token="";
+  do{
+    const url="https://www.googleapis.com/drive/v3/files?q="+encodeURIComponent("'"+folderId+"' in parents and trashed=false")+
+      "&fields="+encodeURIComponent("nextPageToken,files(id,name,mimeType,size)")+"&pageSize=1000&orderBy=name&key="+DRIVE_API_KEY+(token?"&pageToken="+token:"");
+    const r=await fetch(url);
+    if(!r.ok) throw new Error("Drive returned "+r.status+(r.status===403?" (check the API key and that the folder is shared with Anyone with the link)":""));
+    const j=await r.json(); out.push(...(j.files||[])); token=j.nextPageToken||"";
+  }while(token);
+  return out;
+}
+async function crawl(){
+  LIVE.state="loading"; LIVE.files=[]; LIVE.done=0; LIVE.total=1; LIVE.error="";
+  const queue=[{id:ROOT_FOLDER,path:[]}];
+  const worker=async()=>{
+    while(queue.length){
+      const f=queue.shift();
+      try{
+        const items=await driveList(f.id);
+        for(const it of items){
+          if(it.mimeType==="application/vnd.google-apps.folder"){
+            if(!SKIP_FOLDERS.has(it.id)){queue.push({id:it.id,path:[...f.path,it.name]});LIVE.total++;}
+          }else if(/pdf$|zip$|rar$|word|msword/.test(it.mimeType) || /\.(pdf|zip|rar|doc|docx)$/i.test(it.name)){
+            if(/blank MCQ|answer sheet/i.test(it.name)) continue;
+            LIVE.files.push({id:it.id,name:it.name,path:f.path.join(" › ")||"Main folder",size:+it.size||0});
+          }
+        }
+      }catch(e){LIVE.error=e.message;queue.length=0;}
+      LIVE.done++; if(state.year==="live") renderLive();
+    }
+  };
+  await Promise.all([worker(),worker(),worker(),worker(),worker(),worker()]);
+  LIVE.state=LIVE.error?"error":"ready";
+  try{localStorage.setItem("avmc_live",JSON.stringify({t:Date.now(),files:LIVE.files}));}catch(e){}
+  if(state.year==="live") renderLive();
+}
+function mb(n){return n?(n>=1048576?(n/1048576).toFixed(1)+" MB":Math.max(1,Math.round(n/1024))+" KB"):"";}
+function renderLive(){
+  $status.textContent="";
+  if(!DRIVE_API_KEY){
+    $out.innerHTML='<div class="live-note"><strong>Live mode is not switched on yet.</strong><p>This tab lists every file in the Drive folder automatically, including older years and new uploads, without editing this page. It needs a free Google Drive API key, set once:</p>'+
+      '<ol><li>Open <code>console.cloud.google.com</code> and create a project.</li><li>Turn on the <b>Google Drive API</b>.</li><li>Create an <b>API key</b> and restrict it to your GitHub address (HTTP referrer).</li><li>Paste the key between the quotes in <code>const DRIVE_API_KEY = ""</code> near the end of this page, then commit.</li></ol>'+
+      '<p>Until then, use the year tabs above, or <a href="https://drive.google.com/drive/folders/'+ROOT_FOLDER+'" target="_blank" rel="noopener">open the full Drive folder</a>.</p></div>';
+    return;
+  }
+  if(LIVE.state==="idle"){
+    try{const c=JSON.parse(localStorage.getItem("avmc_live")||"null"); if(c&&Date.now()-c.t<6*3600e3){LIVE.files=c.files;LIVE.state="ready";}}catch(e){}
+    if(LIVE.state==="idle"){crawl();}
+  }
+  const q=state.q.trim().toLowerCase(), words=q.split(/\s+/).filter(Boolean);
+  let html="";
+  if(LIVE.state==="loading"){
+    const pct=Math.min(100,Math.round(100*LIVE.done/Math.max(1,LIVE.total)));
+    html+='<div class="live-note">Reading the Drive folders… '+LIVE.done+' of '+LIVE.total+' folders<div class="progress"><i style="width:'+pct+'%"></i></div></div>';
+  }
+  if(LIVE.error) html+='<div class="live-note"><strong>Could not read Drive.</strong> '+esc(LIVE.error)+'</div>';
+  const list=LIVE.files.filter(f=>!words.length||words.every(w=>(f.path+" "+f.name).toLowerCase().includes(w)));
+  const groups=new Map(); list.forEach(f=>{if(!groups.has(f.path))groups.set(f.path,[]);groups.get(f.path).push(f);});
+  const keys=[...groups.keys()].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
+  html+='<div class="status">'+list.length+' file'+(list.length===1?"":"s")+(words.length?" match your search":" in the library")+'.</div>';
+  keys.forEach(k=>{
+    const rows=groups.get(k).sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+    html+='<details class="course"'+(words.length?" open":"")+'><summary><span>'+esc(k)+'</span><span class="n">'+rows.length+'</span></summary><div class="session"><ul class="rows">'+
+      rows.map(r=>'<li class="row"><div class="t"><span class="name">'+esc(r.name)+'</span>'+(r.size?'<span class="path">'+mb(r.size)+'</span>':"")+'</div><div class="act"><a class="btn" href="https://drive.google.com/file/d/'+r.id+'/view" target="_blank" rel="noopener">Open</a><a class="btn primary" href="https://drive.google.com/uc?export=download&id='+r.id+'" rel="noopener">Download</a></div></li>').join("")+
+      '</ul></div></details>';
   });
   $out.innerHTML=html;
 }
