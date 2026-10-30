@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Paper Library · Medical College Library</title>
+<meta name="description" content="Past university question papers for MBBS and M.D. students. Search by subject, open online or download as PDF.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2F6; --card:#FFFFFF; --ink:#10243E; --muted:#51647A; --line:#D5DDE6;
+  --accent:#0B6E8A; --accent-ink:#FFFFFF; --accent-soft:#DCEFF5;
+  --new-bg:#E1F3E8; --new-fg:#1B6B43;
+  --old-bg:#FBEFD3; --old-fg:#7A4F00;
+  --mix-bg:#ECE6F8; --mix-fg:#54399A;
+  --zip-bg:#E8EBEF; --zip-fg:#4B5563;
+  --ses-bg:#E3EAF2; --ses-fg:#1E3A5C;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0B1623; --card:#122234; --ink:#E7EEF6; --muted:#9DB0C5; --line:#23374D;
+    --accent:#58BDD6; --accent-ink:#06222C; --accent-soft:#12394A;
+    --new-bg:#143826; --new-fg:#8FDDB0;
+    --old-bg:#41320F; --old-fg:#F2CF86;
+    --mix-bg:#2A2150; --mix-fg:#C8B9F5;
+    --zip-bg:#222E3B; --zip-fg:#B5C2D0;
+    --ses-bg:#1A2D44; --ses-fg:#BCD2EA;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:150px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.5;-webkit-text-size-adjust:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.top{background:var(--ink);color:#F4F8FC;padding:28px 20px 22px}
+.top-in{max-width:980px;margin:0 auto}
+.top h1{margin:0 0 6px;font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.12;font-weight:700;letter-spacing:-.01em}
+.top p{margin:0;max-width:60ch;color:#C5D3E2}
+.searchbox{margin-top:18px;position:relative;max-width:620px}
+.searchbox input{width:100%;font:inherit;font-size:1.05rem;padding:14px 16px 14px 46px;border-radius:12px;border:2px solid transparent;background:#fff;color:#10243E}
+.searchbox input::placeholder{color:#5B6E83}
+.searchbox svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:#5B6E83}
+.hint{margin-top:8px;font-size:.92rem;color:#AFC0D3}
+
+.tabs-wrap{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs{max-width:980px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:12px 20px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--card);color:var(--ink);padding:9px 16px;border-radius:999px;min-height:44px}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tab small{font-weight:400;opacity:.85;margin-left:6px}
+
+main{max-width:980px;margin:0 auto;padding:18px 20px 60px}
+.status{margin:6px 0 16px;color:var(--muted)}
+.yearblock{margin:0 0 30px}
+.yearblock>h2{font-size:1.45rem;margin:0 0 4px}
+.yearblock>p{margin:0 0 12px;color:var(--muted);font-size:.95rem}
+details.course{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);margin:0 0 10px}
+details.course>summary{cursor:pointer;list-style:none;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:700;font-size:1.1rem;min-height:52px}
+details.course>summary::-webkit-details-marker{display:none}
+details.course>summary .n{font-weight:400;color:var(--muted);font-size:.95rem;white-space:nowrap}
+details.course>summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);margin-left:4px;flex:0 0 auto;transition:transform .15s}
+details.course[open]>summary::after{transform:rotate(-135deg)}
+.session{padding:0 16px 8px}
+.session h3{margin:14px 0 6px;font-size:.98rem;color:var(--ses-fg);background:var(--ses-bg);display:inline-block;padding:3px 10px;border-radius:6px}
+ul.rows{list-style:none;margin:0;padding:0}
+li.row{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 0;border-top:1px solid var(--line)}
+li.row:first-child{border-top:0}
+.t{min-width:0}
+.name{display:block;font-weight:700;overflow-wrap:anywhere}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px}
+.pill{font-size:.84rem;padding:2px 9px;border-radius:999px;font-weight:700}
+.p-new{background:var(--new-bg);color:var(--new-fg)}
+.p-old{background:var(--old-bg);color:var(--old-fg)}
+.p-mix{background:var(--mix-bg);color:var(--mix-fg)}
+.p-zip{background:var(--zip-bg);color:var(--zip-fg)}
+.also{display:block;margin-top:4px;font-size:.9rem;color:var(--muted)}
+.act{display:flex;gap:8px;flex:0 0 auto}
+.btn{font:inherit;font-weight:700;text-decoration:none;text-align:center;padding:10px 16px;min-height:44px;border-radius:9px;border:2px solid var(--line);background:var(--card);color:var(--ink);display:inline-flex;align-items:center;justify-content:center}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:var(--radius);padding:26px;text-align:center}
+.older{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 18px 20px;margin-top:34px}
+.older h2{margin:0 0 6px;font-size:1.25rem}
+.older p{margin:0 0 12px;color:var(--muted)}
+.older .links{display:flex;flex-wrap:wrap;gap:10px}
+footer{max-width:980px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:.92rem}
+@media (max-width:620px){
+  body{font-size:16.5px}
+  li.row{flex-direction:column;align-items:stretch}
+  .act .btn{flex:1}
+}
+@media (prefers-reduced-motion: reduce){ details.course>summary::after{transition:none} }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <h1>Question Paper Library</h1>
+    <p>Past university question papers for MBBS and M.D. students. Pick your year, find your subject, then open the paper or download the PDF.</p>
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search a subject, year or paper, for example Pathology 2023" aria-label="Search question papers" autocomplete="off">
+    </div>
+    <div class="hint">Each paper opens in Google Drive. Use Download to save the PDF to your phone.</div>
+  </div>
+</header>
+
+<div class="tabs-wrap">
+  <div class="tabs" id="tabs" role="tablist" aria-label="Choose your year"></div>
+</div>
+
+<main>
+  <div class="status" id="status" aria-live="polite"></div>
+  <div id="out"></div>
+
+  <section class="older" aria-labelledby="olderh">
+    <h2 id="olderh">Older papers, 2019 to early 2022</h2>
+    <p>These are still being sorted by subject. You can browse them now, grouped by exam session.</p>
+    <div class="links">
+      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1JEYITMF3MaM9j20fjrJphSZs-M8mAzWw">MBBS older sessions</a>
+      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1W7mfX2eDrAxQ4j7Xnprh5dSR4EJ4-wup">M.D. older sessions</a>
+      <a class="btn primary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1uyTlKPnJMBU6uJpTT9k2bfUjVMWNf0kx">Open the full Drive folder</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Papers marked “Old and New Batch” contain both versions in one PDF. Papers marked “Combined paper” hold a third-year and a final-year subject in one PDF, so they are listed under both subjects.
+</footer>
+
+<script>
+/* [Drive file id, file title]. Add a new row here when a paper is added to Drive. */
+const FILES = [
+["1x7pMU0Tchd45lSGT58jclmc53GAPK4ay","III MBBS - Otorhinolaryngology (ENT) - Sept 2026 - Old Batch (Arrear).pdf"],
+["1LjPkRwKymkrOtxJg3EgSNda5oSo5VhE7","III MBBS - Forensic Medicine and Toxicology - Sept 2026 - Old Batch (Arrear).pdf"],
+["1H-BsWEiegnBV1ylUdfS55mi0ODhfGp-Z","III MBBS - Forensic Medicine and Toxicology - Sept 2026 - New Batch.pdf"],
+["1aQ-7oUPoc1AmHit2KIRCPbsfK5Ze0EXH","III MBBS - Community Medicine Paper II - Sept 2026 - Old Batch (Arrear).pdf"],
+["1EDQeSDOW-G9T4_9id0aXE6X7pc2e8QNx","III MBBS - Community Medicine Paper II - Sept 2026.pdf"],
+["1oku-WHplKovJ3QeVJHw3gNXUQcWdqhrK","III MBBS - Community Medicine Paper I - Sept 2026 - Old Batch (Arrear).pdf"],
+["1qVdAmWdP2hN9PBbajPIh9T28Fn1HVyDN","III MBBS - Community Medicine Paper I - Sept 2026.pdf"],
+["1ZKZLbeU4vIpmn1KsgnBYkCjRrRcySCh2","II MBBS - Environmental Studies (EVS) - Sept 2026.pdf"],
+["1pA0vnVkTPnAfZpM6GvukL3_Qltmtt1rh","II MBBS - Pharmacology Paper II - Sept 2026.pdf"],
+["16En8vS3gdpEu8E9EXCGZw-v_sbhfwe9f","II MBBS - Pharmacology Paper I - Sept 2026.pdf"],
+["10_JOMR65E-anIijcROqASI8n0B3TaYof","II MBBS - Pathology Paper II - Sept 2026.pdf"],
+["1JM4BAEYVH5QpibB9WyBLUIAD_TA_TzUH","II MBBS - Pathology Paper I - Sept 2026.pdf"],
+["1mLWANSLb-J1wOc9kw3_4hUjpZ4UtHXci","II MBBS - Microbiology Paper II - Sept 2026.pdf"],
+["1LZ4O0gn1CWVWgmVk0sHld9oj20AFa4w7","II MBBS - Microbiology Paper I - Sept 2026.pdf"],
+["1N-wSBtZCXaCz-aeS5IsQoBwHcZMYdw6f","M.D. Degree Examination - Paper IV (Combined Specialties) - Sept 2026.pdf"],
+["1kc8sGzK4klsB8bPI2nogo2hr2HiRJ74a","M.D. Degree Examination - Paper III (Combined Specialties) - Sept 2026.pdf"],
+["1-ElUwPltrfvy8xG63ShpDeLK77i3ukwx","M.D. Degree Examination - Paper II (Combined Specialties) - Sept 2026.pdf"],
+["1ykPzlg9Bu88ljUKGTAX8rU3PWLCsgc0e","M.D. Degree Examination - Paper I (Combined Specialties) - Sept 2026.pdf"],
+["1cTUWMB7F99xqNFY6bP-H63YNxWQBGqNw","II MBBS - Environmental Studies (EVS) - Aug 2025.pdf"],
+["1Kd18auyZzxrdL_vLvHPQhAB1EdVBKC6i","II MBBS - Pharmacology Paper II - Aug 2025 - Old Batch.pdf"],
+["1ad8-VNxS0ZYbM0JOtmh-wAfimLhtol_V","II MBBS - Pharmacology Paper II - Aug 2025 - New Batch.pdf"],
+["1nR2yqYmrRcWlLdZSG7gmpR8GVOPOYlD4","II MBBS - Pharmacology Paper I - Aug 2025 - Old Batch.pdf"],
+["1H2dyg8ju-k9Lk19ETTZrmU11TBGX6V7r","II MBBS - Pharmacology Paper I - Aug 2025 - New Batch.pdf"],
+["1tD47S51hStm71wuR-p92GEokqPxv1JtT","II MBBS - Pathology Paper II - Aug 2025 - Old Batch.pdf"],
+["1hJRh51agfylB6_VT63p5SO2RyDBsINgL","II MBBS - Pathology Paper II - Aug 2025 - New Batch.pdf"],
+["118S0mettKxkAs-kH3x1J5hGN-20AATGb","II MBBS - Pathology Paper I - Aug 2025 - Old Batch.pdf"],
+["1gA_JQtdJnRuAhI6H8IhsrnHy7UGNvPGe","II MBBS - Pathology Paper I - Aug 2025 - New Batch.pdf"],
+["18ciWtIOWmkAZx0GU14M-5NAp372bW1RL","II MBBS - Microbiology Paper II - Aug 2025 - Old Batch.pdf"],
+["10hMg2CWYLSobzkrm35vQyZ90p_nLWTRM","II MBBS - Microbiology Paper II - Aug 2025 - New Batch.pdf"],
+["1UktCobVY_SdWewi2_wWFtpmGc_ysnB37","II MBBS - Microbiology Paper I - Aug 2025 - Old Batch.pdf"],
+["10TdN5aqcExLl1Fdz7iVRxP300SrQsouF","II MBBS - Microbiology Paper I - Aug 2025 - New Batch.pdf"],
+["1upRqyc3B0ezBNlg2iIIVEiC4dnwb8W8J","IV MBBS - Paediatrics (incl. Neonatology) - May 2023.pdf"],
+["1Kj8HM9ZLt7z_9ATiQiZWmvKjgqOayxMj","IV MBBS - Obstetrics and Gynaecology Paper II (Gynaecology) - May 2023.pdf"],
+["11aaQR_IAu2iue0E4fLHY25zRpBNCYeGT","IV MBBS - Obstetrics and Gynaecology Paper I (Obstetrics) - May 2023.pdf"],
+["1-Ldy4E5PjDjduoyJWuKCeyIkbobz1zbM","IV MBBS - General Surgery Paper II (incl. Anaesthesiology, Dental and Radiology) - May 2023.pdf"],
+["1X7HkgAGrO5fPZNGhI-trn4PxQ0fQkh6x","IV MBBS - General Surgery Paper I (incl. Orthopaedics) - May 2023.pdf"],
+["19N_nHdoy1AA9eWyKmVSXyJAfsdTnO5zH","IV MBBS - General Medicine Paper II (incl. Psychiatry, Dermatology and STD) - May 2023.pdf"],
+["1Ksc6Fe5pBdwzwBJBkq-GREvOruhAWEsI","IV MBBS - General Medicine Paper I - May 2023.pdf"],
+["1ej8ayMtZ2uWf6s2T3J_EfO-D3Lv-VyNH","IV MBBS - Paediatrics (incl. Neonatology) - Mar 2023.pdf"],
+["1NU-f_SXv0DQt5cEs7SvbsYKsTVVbt6M9","IV MBBS - Obstetrics and Gynaecology Paper II (Gynaecology) - Mar 2023.pdf"],
+["13tcJ0Qi-rZ1E-lebz_7v0I9AdmrLKOyy","IV MBBS - Obstetrics and Gynaecology Paper I (Obstetrics) - Mar 2023.pdf"],
+["1Z-mAGwgVXe3ShWx1aVgq3641XGZ0-fPS","IV MBBS - General Surgery Paper II (incl. Anaesthesiology, Dental and Radiology) - Mar 2023.pdf"],
+["1jO6aDSh0nDjebgktyhdbuPJgR9360IDs","IV MBBS - General Surgery Paper I (incl. Orthopaedics) - Mar 2023.pdf"],
+["1AtDnp2QuOAtMVbNOEe437oGGiv9DZavE","IV MBBS - General Medicine Paper II (incl. Psychiatry, Dermatology and STD) - Mar 2023.pdf"],
+["1pF8Xs7ckLZ4tjAaElr4k_-6X1uq1wVGh","IV MBBS - General Medicine Paper I - Mar 2023.pdf"],
+["1I6aiITTAOBOr9kHQAwa-AQPIn1B6Ofxt","I MBBS - Biochemistry Paper II - Apr 2023.pdf"],
+["11tjntQvT_VkyZ5Q6mmAXvWK4_O9xiigx","I MBBS - Biochemistry Paper I - Apr 2023.pdf"],
+["1FsviQPbsaSQY0UatXOgP3WZGWsYasBdn","I MBBS - Biochemistry Paper II - Feb 2023.pdf"],
+["1fX69EhakBipouaG8hejNvnAwFwKAS280","I MBBS - Biochemistry Paper I - Feb 2023.pdf"],
+["17F7RoRQNz3pYNIM6Sw5ghryxWTfia6I8","I MBBS - Physiology Paper II - Apr 2023.pdf"],
+["1-H1MuuZw0caKhdELQlttUfFt58WObuow","I MBBS - Physiology Paper I - Apr 2023.pdf"],
+["1QrmjXb_h5wXDraFItIZjDjobdv4kiWcI","I MBBS - Physiology Paper II - Feb 2023.pdf"],
+["1v84g-AzGDeNLbXxr_H8efX0lEvzVYscJ","I MBBS - Physiology Paper I - Feb 2023.pdf"],
+["12-OAIf3BhAr9qh_7Lcc_MWBIXPu8rO9D","I MBBS - Anatomy Paper II - Apr 2023.pdf"],
+["16eBjJj_Qw5ejf8PNLY4wScYE9MmGMa-D","I MBBS - Anatomy Paper I - Apr 2023.pdf"],
+["1KSfR27lO2I_nDXxsYo4D1yf8FwEel0e_","I MBBS - Anatomy Paper II - Feb 2023.pdf"],
+["1f8q0WQbfeOBWFKVZVRDYWJ_IV_Y2XjUS","I MBBS - Anatomy Paper I - Feb 2023.pdf"],
+["1rkJJDdV-RKU8FRGXHcEdPUpJaL6_56k7","III MBBS - Forensic Medicine and Toxicology - Feb 2023 - New Batch.pdf"],
+["1iGcgwUutVg2u_xDdOPB2Uo8wnZeo2FZ0","III MBBS - Ophthalmology - Feb 2023 (Old and New Batch).pdf"],
+["1Q11jpa264BZP2yZ0VFvLB2gqBfL9Yznv","III MBBS - Otorhinolaryngology (ENT) - Feb 2023 (Old and New Batch).pdf"],
+["1lV44BBhn_dmQ-QC-m6MN5RbiwNmqZYrH","III MBBS - Community Medicine Paper II - Feb 2023 (Old and New Batch).pdf"],
+["1un2gbek0_rbUpHJndWEOrz0tDLkk69-m","III MBBS - Community Medicine Paper I - Feb 2023 (Old and New Batch).pdf"],
+["1cMMJrErbPAUjvAhN-iGpWSfZKfS5eKiz","II MBBS - Pharmacology Paper II - Jan 2023 (Old and New Batch).pdf"],
+["1VEf2XcLPfPy6s2kVpL1-oiiWcVlIg7Ke","II MBBS - Pharmacology Paper I - Jan 2023 (Old and New Batch).pdf"],
+["1_4VA79YjYb8b7hiQuYTtUuEzvmOWg7az","II MBBS - Environmental Studies (EVS) - Jan 2023.pdf"],
+["1xIxfkkWU8tJd1LbW9Jj_kRLw1hOOT67E","II MBBS - Pathology Paper II - Jan 2023 (Old and New Batch).pdf"],
+["11IroEHM_zop9Psh4LxskCw7zhsboy_Gu","II MBBS - Pathology Paper I - Jan 2023 (Old and New Batch).pdf"],
+["1oIV4zo-YmAEG2MKDITyPrBOqCmDK2a8I","II MBBS - Microbiology Paper II - Jan 2023 (Old and New Batch).pdf"],
+["1jOhwjoL5BMEpnoGC7LhhfKOrnNeEEOgk","II MBBS - Microbiology Paper I - Jan 2023 (Old and New Batch).pdf"],
+["1BgFm1FgCbfwKFZJpVIQyUm7qgQOJJ1n_","III MBBS - Environmental Studies (EVS) - Jan 2024.pdf"],
+["16lhtRbOUe9NKDoUxHLeel5aX7kyGOisX","III MBBS - Community Medicine Paper II - Jan 2024 - Old Batch.pdf"],
+["1G5SNyafULTrMlzBqM5pNA6CDbAmyxc63","III MBBS - Community Medicine Paper I - Jan 2024 - Old Batch.pdf"],
+["1CyM9d3ss_LbXT46K1r7oUbiiOaqf8Rga","III MBBS - Community Medicine Paper II - Jan 2024 - New Batch.pdf"],
+["1JzI9yJJY4cwPV6_6UZcDUcJCXhcNimog","III MBBS - Community Medicine Paper I - Jan 2024 - New Batch.pdf"],
+["12Td-8jacC-eYb_oEPoiUz6JeYEht38hZ","III MBBS - Forensic Medicine and Toxicology - Jan 2024 - New Batch.pdf"],
+["1P2j8ao5Wx1aFyL4nQGQwA1UmDs3GCnME","III MBBS - Otorhinolaryngology (ENT) - Jan 2024 - Old Batch.pdf"],
+["13LTB4jHpVyfoNQ_4DExfHNnmploBnEfN","III MBBS - Otorhinolaryngology (ENT) - Jan 2024 - New Batch.pdf"],
+["1WrHjV0BlfALy6uGliypbfNAQ9Ctrorp1","III MBBS - Ophthalmology - Jan 2024 - Old Batch.pdf"],
+["11b25y35merLIrfOf_pNeOjsFzA7Tpv75","III MBBS - Ophthalmology - Jan 2024 - New Batch.pdf"],
+["1OYVDBOBDSKOObuw6bYFkC3NAnf7_SyO9","I MBBS - Biochemistry Paper II - Jan 2024 - Old Batch.pdf"],
+["156w3HUXESlLFQfKvIzPHobNJ7VRlWXVr","I MBBS - Biochemistry Paper I - Jan 2024 - Old Batch.pdf"],
+["1gIoFMhSCQmmKQQ0BVjc5N4hps9MNK5-E","I MBBS - Biochemistry Paper II - Jan 2024 - New Batch.pdf"],
+["1Pv8Pqe7MyrgvQ-NX53ivyLd07rCzZupe","I MBBS - Biochemistry Paper I - Jan 2024 - New Batch.pdf"],
+["1itUrrMCXpGyt7sUAYKFB7AYym2_Dr261","I MBBS - Physiology Paper II - Jan 2024 - Old Batch.pdf"],
+["1_-7YXwfXnNGzS03rNP2hv_kw3S72XOQS","I MBBS - Physiology Paper I - Jan 2024 - Old Batch.pdf"],
+["1x_NTb9_zKVg4eGuWCJ2oJUOb3anyjR5n","I MBBS - Physiology Paper II - Jan 2024 - New Batch.pdf"],
+["1LW1uA5HuM6caPbRU_bVLvm53XjvF2CFs","I MBBS - Physiology Paper I - Jan 2024 - New Batch.pdf"],
+["1AELF-h_sX_pcGyX86-o0vcht51zdmp_J","I MBBS - Anatomy Paper II - Jan 2024 - Old Batch.pdf"],
+["1Cln8C7ThTTtlUl9LgeNN8E3l2bVqQPuo","I MBBS - Anatomy Paper I - Jan 2024 - Old Batch.pdf"],
+["1y9XRsbIxcqUbxUvmjrnBFaC1vkp4XnEX","I MBBS - Anatomy Paper II - Jan 2024 - New Batch.pdf"],
+["1HfiE3TeK1bzmE-LauiYug3HGGivMY7du","I MBBS - Anatomy Paper I - Jan 2024 - New Batch.pdf"],
+["1dSJ2rw97YxJrGXGqhP6cWNjvljB2sviu","II MBBS - Environmental Studies (EVS) - Dec 2024.pdf"],
+["143xnYLgoHD_UiyOaqv4Kgpmqfz-WBkJD","II MBBS - Pharmacology Paper II - Dec 2024.pdf"],
+["1KWN-8-h54d6ixttljRF9BmxOnO8PE0bx","II MBBS - Pharmacology Paper I - Dec 2024.pdf"],
+["1exOvddOWKiBjZ66kHpD6tFWD5v9A7WrM","II MBBS - Pathology Paper II - Dec 2024.pdf"],
+["1-wE9xI3a60CAQyA4IXJkuK-3vpqQH4Jh","II MBBS - Pathology Paper I - Dec 2024.pdf"],
+["1ASAXrUlF03X_rO52PlCIx1dDf_e4IS19","II MBBS - Microbiology Paper II - Dec 2024.pdf"],
+["10cdyIQYno_olsXB7ecIrznTg5S8AE0jV","II MBBS - Microbiology Paper I - Dec 2024.pdf"],
+["15Ps24Ob6XHYfy1wJlALgwFuLeImG0SXI","I MBBS - Physiology Paper I - Oct 2024.pdf"],
+["1v5Wu2oBKIv6KxvrQi-zPyU0DuXyGi7cV","IV MBBS - Obstetrics and Gynaecology Paper I (Obstetrics) - Jan 2022.pdf"],
+["1dOLKnIPdDPAIkFuPBS_XXJEZonQpdNvk","III MBBS Community Medicine Paper II + IV MBBS General Surgery Paper II - Jan 2022 (Combined).pdf"],
+["19Q1DiOxs8j96TM4FSsZWSPT9TYEDN1Mw","III MBBS Community Medicine Paper I + IV MBBS General Surgery Paper I - Jan 2022 (Combined).pdf"],
+["1xJO4MKdif9w90h1aToTgOdQEEhlT39Id","III MBBS ENT + IV MBBS General Medicine Paper II - Jan 2022 (Combined).pdf"],
+["1W8oTpjeJuo8jKQ-JDtCj8iZk5pXUFI2q","III MBBS Ophthalmology + IV MBBS General Medicine Paper I - Jan 2022 (Combined).pdf"],
+["1QRQEc79ckQE5qcmDoNSFVgrSyyNZw7hg","I MBBS - Biochemistry Paper II - Jan 2022.pdf"],
+["1b1lOnPexCd2kSV2Kb4rbxusIcfvJH0EA","I MBBS - Biochemistry Paper I - Jan 2022.pdf"],
+["1hrOpXBdlbHB7NbbNd5GhKfZ4TIwhIckY","I MBBS - Physiology Paper II - Jan 2022.pdf"],
+["1pI4meDS9hWMq2TXTB4Qdg6izAhpjHxJv","I MBBS - Physiology Paper I - Jan 2022.pdf"],
+["1XgdDm3l9Fsj1_3QkaRDQ1QHjFRxZi3bB","I MBBS - Anatomy Paper II - Jan 2022.pdf"],
+["15zR1VNSx_i4l_bHrRukuwtMCXdSz29QL","I MBBS - Anatomy Paper I - Jan 2022.pdf"],
+["1hkbJhlOa1HeSjBKTaenU_nDahPbRHpzN","II MBBS - Pharmacology Paper II - Jun 2022 (Old and New Batch).pdf"],
+["18KbiDA7fBM79UpZQwOfSyQMJdMzvmwaa","II MBBS - Pharmacology Paper I - Jun 2022 (Old and New Batch).pdf"],
+["1aUNGK-Dr7PUInFzZUWjpQufOyu4xcBP7","II MBBS - Pathology Paper II - Jun 2022 (Old and New Batch).pdf"],
+["15EBa-XGuP43dA-cAolJjtiqVEuR3vk-A","II MBBS - Pathology Paper I - Jun 2022 (Old and New Batch).pdf"],
+["10Gd6p7m0tbMyn7QyNeCQNouUTuNdRW4O","II MBBS - Microbiology Paper II - Jun 2022 (Old and New Batch).pdf"],
+["1oJu4yRD3HaD5jCZYxUyITAfOF1G01-wR","II MBBS - Microbiology Paper I - Jun 2022 (Old and New Batch).pdf"],
+["182D7j_tnSjB6AItJ2EYURa9-ePlmuOfy","IV MBBS - Paediatrics (incl. Neonatology) - Sep 2022.pdf"],
+["1jpU2h25R7m4cRPQiT1GwO1g13gyb49qP","IV MBBS - Obstetrics and Gynaecology Paper II (Gynaecology) - Sep 2022.pdf"],
+["1tTOO69f1zyMtaPW0K7aRu2ykucZ_9VI4","IV MBBS - Obstetrics and Gynaecology Paper I (Obstetrics) - Sep 2022.pdf"],
+["1Agn3KZ5wW4py4_bAhOwcNz-d9JAnmDLX","III MBBS Community Medicine Paper II + IV MBBS General Surgery Paper II - Sep 2022 (Combined).pdf"],
+["1cCFBQyoQCftJnsOMmM4_e8B4YZPssUXK","III MBBS Community Medicine Paper I + IV MBBS General Surgery Paper I - Sep 2022 (Combined).pdf"],
+["1qHeRzibNPz5ionkRb3KIP1mpsTUjZJPz","III MBBS ENT + IV MBBS General Medicine Paper II - Sep 2022 (Combined).pdf"],
+["1_jlDWmxdz3e-3xOhaLEM9abAWpXpJszO","III MBBS Ophthalmology + IV MBBS General Medicine Paper I - Sep 2022 (Combined).pdf"],
+["1b1o8-2I7QntbxVfSXyFTv2GlFoZzkXLK","IV MBBS - All subjects, Regular Exam - Apr 2026 (ZIP of papers).zip"],
+["1a-9b1kkC3cZ1HxGmQQEPphRD8vKTlom3","M.D. Degree Examination - Supplementary exam - 2026 (ZIP of papers).zip"]
+];
+
+const MON={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Sep:9,Sept:9,Oct:10,Nov:11,Dec:12};
+const YEAR_ORDER=["I MBBS","II MBBS","III MBBS","IV MBBS","M.D. (PG)"];
+const YEAR_NOTE={
+  "I MBBS":"Anatomy, Physiology, Biochemistry",
+  "II MBBS":"Microbiology, Pathology, Pharmacology, EVS",
+  "III MBBS":"Community Medicine, Forensic Medicine, ENT, Ophthalmology",
+  "IV MBBS":"General Medicine, General Surgery, Obstetrics and Gynaecology, Paediatrics",
+  "M.D. (PG)":"Postgraduate degree examinations"
+};
+
+function baseCourse(c){
+  let b=c.replace(/\s*\(incl\.[^)]*\)/,"")
+          .replace(/\s+Paper\s+(I|II|III|IV)\b.*$/,"")
+          .trim();
+  if(b==="ENT") b="Otorhinolaryngology (ENT)";
+  return b;
+}
+function sessionOf(n){
+  const m=n.match(/\b(Jan|Feb|Mar|Apr|May|Jun|Sept|Sep|Oct|Nov|Dec)\s+(20\d\d)\b/);
+  if(m) return {label:(m[1]==="Sept"?"Sep":m[1])+" "+m[2], key:(+m[2])*100+MON[m[1]]};
+  const y=n.match(/\b(20\d\d)\b/);
+  return y?{label:y[1],key:(+y[1])*100}:{label:"Undated",key:0};
+}
+function tagsOf(n,isZip){
+  const t=[];
+  if(isZip) t.push(["ZIP file","p-zip"]);
+  if(/Old and New Batch/.test(n)) t.push(["Old and new batch","p-mix"]);
+  else {
+    if(/New Batch/.test(n)) t.push(["New batch","p-new"]);
+    if(/Old Batch/.test(n)) t.push(["Old batch","p-old"]);
+  }
+  if(/Arrear/.test(n)) t.push(["Arrear","p-old"]);
+  if(/Combined\)/.test(n) && / \+ /.test(n)) t.push(["Combined paper","p-mix"]);
+  return t;
+}
+function yearOf(prefix){
+  const m=prefix.match(/^(I|II|III|IV) MBBS/);
+  return m?m[0]:null;
+}
+
+const ITEMS=[];
+FILES.forEach(([id,title])=>{
+  const isZip=/\.zip$/i.test(title);
+  const n=title.replace(/\.(pdf|zip)$/i,"");
+  const ses=sessionOf(n);
+  const tags=tagsOf(n,isZip);
+  const dl="https://drive.google.com/uc?export=download&id="+id;
+  const view="https://drive.google.com/file/d/"+id+"/view";
+  if(n.startsWith("M.D.")){
+    const label=n.replace(/^M\.D\. Degree Examination - /,"").replace(/ - (Sept|Sep) 2026$/,"").replace(/ - 2026$/,"");
+    ITEMS.push({year:"M.D. (PG)",course:"M.D. Degree Examination",label:isZip?"Supplementary exam, all papers":label,ses,tags,dl,view,id});
+    return;
+  }
+  if(/ \+ IV MBBS /.test(n)){
+    const left=n.split(" - ")[0];
+    const parts=left.split(" + ");
+    const labels=parts.map(p=>p.replace(/^(I|II|III|IV) MBBS\s+/,""));
+    parts.forEach((p,i)=>{
+      const y=yearOf(p);
+      const other=labels[1-i];
+      ITEMS.push({year:y,course:baseCourse(labels[i]),label:labels.join(" + "),ses,tags,dl,view,id,also:"Same PDF also holds "+other});
+    });
+    return;
+  }
+  if(isZip && /^IV MBBS/.test(n)){
+    ITEMS.push({year:"IV MBBS",course:"All subjects (ZIP files)",label:"Regular exam, all subjects",ses,tags,dl,view,id});
+    return;
+  }
+  const parts=n.split(" - ");
+  const y=yearOf(parts[0]);
+  const course=baseCourse(parts[1]);
+  const isEvs=/^Environmental Studies/.test(course);
+  ITEMS.push({year:isEvs?"II MBBS":y,course,label:isEvs&&y!=="II MBBS"?parts[1]+" (printed as Third MBBS Part I)":parts[1],ses,tags,dl,view,id});
+});
+
+const state={year:"all",q:""};
+const $out=document.getElementById("out");
+const $tabs=document.getElementById("tabs");
+const $status=document.getElementById("status");
+const $q=document.getElementById("q");
+
+function esc(s){return s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+
+function buildTabs(){
+  const counts={all:new Set(ITEMS.map(i=>i.id)).size};
+  YEAR_ORDER.forEach(y=>counts[y]=new Set(ITEMS.filter(i=>i.year===y).map(i=>i.id)).size);
+  const mk=(key,label)=>`<button class="tab" role="tab" data-y="${esc(key)}" aria-selected="${state.year===key}">${esc(label)}<small>${counts[key]}</small></button>`;
+  $tabs.innerHTML=mk("all","All papers")+YEAR_ORDER.map(y=>mk(y,y)).join("");
+  $tabs.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{state.year=b.dataset.y;buildTabs();render();}));
+}
+
+function render(){
+  const q=state.q.trim().toLowerCase();
+  const words=q.split(/\s+/).filter(Boolean);
+  const list=ITEMS.filter(i=>{
+    if(state.year!=="all" && i.year!==state.year) return false;
+    if(!words.length) return true;
+    const hay=(i.year+" "+i.course+" "+i.label+" "+i.ses.label+" "+i.tags.map(t=>t[0]).join(" ")).toLowerCase();
+    return words.every(w=>hay.includes(w));
+  });
+  const uniq=new Set(list.map(i=>i.id)).size;
+  if(!list.length){
+    $status.textContent="";
+    $out.innerHTML='<div class="empty"><strong>No paper matches that search.</strong><br>Try a shorter word such as a subject name, or choose “All papers”.</div>';
+    return;
+  }
+  $status.textContent=uniq+" paper"+(uniq===1?"":"s")+(q?" match your search":"")+".";
+  const openAll=!!q || state.year!=="all";
+  let html="";
+  YEAR_ORDER.forEach(y=>{
+    const yl=list.filter(i=>i.year===y);
+    if(!yl.length) return;
+    const courses=[...new Set(yl.map(i=>i.course))].sort((a,b)=>a.localeCompare(b));
+    html+=`<section class="yearblock"><h2>${esc(y)}</h2><p>${esc(YEAR_NOTE[y]||"")}</p>`;
+    courses.forEach(c=>{
+      const cl=yl.filter(i=>i.course===c);
+      const sessions=[...new Map(cl.map(i=>[i.ses.label,i.ses])).values()].sort((a,b)=>b.key-a.key);
+      html+=`<details class="course"${openAll?" open":""}><summary><span>${esc(c)}</span><span class="n">${cl.length} paper${cl.length===1?"":"s"}</span></summary>`;
+      sessions.forEach(s=>{
+        const rows=cl.filter(i=>i.ses.label===s.label).sort((a,b)=>a.label.localeCompare(b.label)||a.tags.length-b.tags.length);
+        html+=`<div class="session"><h3>${esc(s.label)}</h3><ul class="rows">`;
+        rows.forEach(r=>{
+          html+=`<li class="row"><div class="t"><span class="name">${esc(r.label)}</span>`+
+            (r.tags.length?`<span class="pills">${r.tags.map(t=>`<span class="pill ${t[1]}">${esc(t[0])}</span>`).join("")}</span>`:"")+
+            (r.also?`<span class="also">${esc(r.also)}</span>`:"")+
+            `</div><div class="act"><a class="btn" href="${r.view}" target="_blank" rel="noopener" aria-label="Open ${esc(r.label)} ${esc(s.label)}">Open</a>`+
+            `<a class="btn primary" href="${r.dl}" rel="noopener" aria-label="Download ${esc(r.label)} ${esc(s.label)}">Download</a></div></li>`;
+        });
+        html+=`</ul></div>`;
+      });
+      html+=`</details>`;
+    });
+    html+=`</section>`;
+  });
+  $out.innerHTML=html;
+}
+
+$q.addEventListener("input",e=>{state.q=e.target.value;render();});
+buildTabs();
+render();
+</script>
+</body>
+</html>
