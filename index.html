@@ -111,6 +111,9 @@ footer{max-width:980px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font
 .brand h1{margin:0;font-size:clamp(1.5rem,4vw,2.1rem)}
 .sitefoot{max-width:980px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:18px}
 .sitefoot strong{color:var(--ink)}
+
+.morelinks{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.morelinks .btn{min-height:40px;padding:8px 14px;font-size:.95rem}
 </style>
 </head>
 <body>
@@ -142,17 +145,6 @@ footer{max-width:980px;margin:0 auto;padding:0 20px 40px;color:var(--muted);font
   <div class="status" id="status" aria-live="polite"></div>
   <div id="out"></div>
 
-  <section class="older" aria-labelledby="olderh">
-    <h2 id="olderh">Older papers, 2019 to early 2022</h2>
-    <p>These are still being sorted by subject. You can browse them now, grouped by exam session.</p>
-    <div class="links">
-      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1JEYITMF3MaM9j20fjrJphSZs-M8mAzWw">MBBS older sessions</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1W7mfX2eDrAxQ4j7Xnprh5dSR4EJ4-wup">M.D. older sessions</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1hbLYPvko1SYBB8kBePGc9Tt41pRlnIRV">M.D. and M.S. specialty-wise papers</a>
-      <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1WN8GUDGlJc2wAO7neUC58f-rrhiv5o9F">Recommended textbooks</a>
-      <a class="btn primary" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1uyTlKPnJMBU6uJpTT9k2bfUjVMWNf0kx">Open the full Drive folder</a>
-    </div>
-  </section>
 </main>
 
 <div class="sitefoot">
@@ -479,6 +471,17 @@ FILES.forEach(([id,title])=>{
   ITEMS.push({year:isEvs?"II MBBS":y,course,label:isEvs&&y!=="II MBBS"?parts[1]+" (printed as Third MBBS Part I)":parts[1],ses,tags,dl,view,id});
 });
 
+const TOPIC_LINKS={
+  "I MBBS":[["Older MBBS papers, 2019 to early 2022 (by exam session)","https://drive.google.com/drive/folders/1JEYITMF3MaM9j20fjrJphSZs-M8mAzWw"]],
+  "II MBBS":[["Older MBBS papers, 2019 to early 2022 (by exam session)","https://drive.google.com/drive/folders/1JEYITMF3MaM9j20fjrJphSZs-M8mAzWw"]],
+  "III MBBS":[["Older MBBS papers, 2019 to early 2022 (by exam session)","https://drive.google.com/drive/folders/1JEYITMF3MaM9j20fjrJphSZs-M8mAzWw"]],
+  "IV MBBS":[["Older MBBS papers, 2019 to early 2022 (by exam session)","https://drive.google.com/drive/folders/1JEYITMF3MaM9j20fjrJphSZs-M8mAzWw"]],
+  "M.D. (PG)":[["M.D. older sessions","https://drive.google.com/drive/folders/1W7mfX2eDrAxQ4j7Xnprh5dSR4EJ4-wup"],["M.D. and M.S. specialty-wise papers","https://drive.google.com/drive/folders/1hbLYPvko1SYBB8kBePGc9Tt41pRlnIRV"]]
+};
+function topicLinks(y){
+  const L=TOPIC_LINKS[y]||[];
+  return L.length?'<div class="morelinks">'+L.map(l=>'<a class="btn" target="_blank" rel="noopener" href="'+l[1]+'">'+esc(l[0])+'</a>').join("")+'</div>':"";
+}
 const state={year:"all",q:""};
 const $out=document.getElementById("out");
 const $tabs=document.getElementById("tabs");
@@ -518,7 +521,7 @@ function render(){
     const yl=list.filter(i=>i.year===y);
     if(!yl.length) return;
     const courses=[...new Set(yl.map(i=>i.course))].sort((a,b)=>a.localeCompare(b));
-    html+=`<section class="yearblock"><h2>${esc(y)}</h2><p>${esc(YEAR_NOTE[y]||"")}</p>`;
+    html+=`<section class="yearblock"><h2>${esc(y)}</h2><p>${esc(YEAR_NOTE[y]||"")}</p>`+topicLinks(y);
     courses.forEach(c=>{
       const cl=yl.filter(i=>i.course===c);
       const sessions=[...new Map(cl.map(i=>[i.ses.label,i.ses])).values()].sort((a,b)=>b.key-a.key);
